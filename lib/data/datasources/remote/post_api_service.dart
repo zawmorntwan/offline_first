@@ -19,4 +19,22 @@ class PostApiService {
       throw Exception('Failed to fetch from API: \$e');
     }
   }
+
+  Future<PostModel> createPost(Map<String, dynamic> payload) async {
+    try {
+      // JSONPlaceholder expects userId, title, body.
+      final response = await _dio.post(
+        'https://jsonplaceholder.typicode.com/posts',
+        data: payload,
+      );
+      if (response.statusCode == 201) {
+        return PostModel.fromJson(response.data);
+      } else {
+        throw Exception('Failed to create post');
+      }
+    } catch (e) {
+      throw Exception('Failed to create post via API: \$e');
+    }
+  }
 }
+

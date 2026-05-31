@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostModel {
 
- int get id; int get userId; String get title; String get body;
+ dynamic get id; int get userId; String get title; String get body; int get isSyncPending; int get hasSyncFailed;
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PostModelCopyWith<PostModel> get copyWith => _$PostModelCopyWithImpl<PostModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&const DeepCollectionEquality().equals(other.id, id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.isSyncPending, isSyncPending) || other.isSyncPending == isSyncPending)&&(identical(other.hasSyncFailed, hasSyncFailed) || other.hasSyncFailed == hasSyncFailed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,title,body);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(id),userId,title,body,isSyncPending,hasSyncFailed);
 
 @override
 String toString() {
-  return 'PostModel(id: $id, userId: $userId, title: $title, body: $body)';
+  return 'PostModel(id: $id, userId: $userId, title: $title, body: $body, isSyncPending: $isSyncPending, hasSyncFailed: $hasSyncFailed)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $PostModelCopyWith<$Res>  {
   factory $PostModelCopyWith(PostModel value, $Res Function(PostModel) _then) = _$PostModelCopyWithImpl;
 @useResult
 $Res call({
- int id, int userId, String title, String body
+ dynamic id, int userId, String title, String body, int isSyncPending, int hasSyncFailed
 });
 
 
@@ -65,13 +65,15 @@ class _$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = null,Object? title = null,Object? body = null,Object? isSyncPending = null,Object? hasSyncFailed = null,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as dynamic,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isSyncPending: null == isSyncPending ? _self.isSyncPending : isSyncPending // ignore: cast_nullable_to_non_nullable
+as int,hasSyncFailed: null == hasSyncFailed ? _self.hasSyncFailed : hasSyncFailed // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -156,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  String title,  String body)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic id,  int userId,  String title,  String body,  int isSyncPending,  int hasSyncFailed)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   return orElse();
 
 }
@@ -177,10 +179,10 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  String title,  String body)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic id,  int userId,  String title,  String body,  int isSyncPending,  int hasSyncFailed)  $default,) {final _that = this;
 switch (_that) {
 case _PostModel():
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +199,10 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  String title,  String body)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic id,  int userId,  String title,  String body,  int isSyncPending,  int hasSyncFailed)?  $default,) {final _that = this;
 switch (_that) {
 case _PostModel() when $default != null:
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   return null;
 
 }
@@ -212,13 +214,15 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 @JsonSerializable()
 
 class _PostModel implements PostModel {
-  const _PostModel({required this.id, required this.userId, required this.title, required this.body});
+  const _PostModel({required this.id, required this.userId, required this.title, required this.body, this.isSyncPending = 0, this.hasSyncFailed = 0});
   factory _PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
-@override final  int id;
+@override final  dynamic id;
 @override final  int userId;
 @override final  String title;
 @override final  String body;
+@override@JsonKey() final  int isSyncPending;
+@override@JsonKey() final  int hasSyncFailed;
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&const DeepCollectionEquality().equals(other.id, id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.isSyncPending, isSyncPending) || other.isSyncPending == isSyncPending)&&(identical(other.hasSyncFailed, hasSyncFailed) || other.hasSyncFailed == hasSyncFailed));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,title,body);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(id),userId,title,body,isSyncPending,hasSyncFailed);
 
 @override
 String toString() {
-  return 'PostModel(id: $id, userId: $userId, title: $title, body: $body)';
+  return 'PostModel(id: $id, userId: $userId, title: $title, body: $body, isSyncPending: $isSyncPending, hasSyncFailed: $hasSyncFailed)';
 }
 
 
@@ -253,7 +257,7 @@ abstract mixin class _$PostModelCopyWith<$Res> implements $PostModelCopyWith<$Re
   factory _$PostModelCopyWith(_PostModel value, $Res Function(_PostModel) _then) = __$PostModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int userId, String title, String body
+ dynamic id, int userId, String title, String body, int isSyncPending, int hasSyncFailed
 });
 
 
@@ -270,13 +274,15 @@ class __$PostModelCopyWithImpl<$Res>
 
 /// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? title = null,Object? body = null,Object? isSyncPending = null,Object? hasSyncFailed = null,}) {
   return _then(_PostModel(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as dynamic,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isSyncPending: null == isSyncPending ? _self.isSyncPending : isSyncPending // ignore: cast_nullable_to_non_nullable
+as int,hasSyncFailed: null == hasSyncFailed ? _self.hasSyncFailed : hasSyncFailed // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

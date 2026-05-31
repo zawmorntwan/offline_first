@@ -214,6 +214,100 @@ final class GetPostsUseCaseProvider
 
 String _$getPostsUseCaseHash() => r'1c0a6faa4afac7ca487f9f44974b390a8745fbfa';
 
+@ProviderFor(connectivityService)
+final connectivityServiceProvider = ConnectivityServiceProvider._();
+
+final class ConnectivityServiceProvider
+    extends
+        $FunctionalProvider<
+          ConnectivityService,
+          ConnectivityService,
+          ConnectivityService
+        >
+    with $Provider<ConnectivityService> {
+  ConnectivityServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'connectivityServiceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$connectivityServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<ConnectivityService> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  ConnectivityService create(Ref ref) {
+    return connectivityService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ConnectivityService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ConnectivityService>(value),
+    );
+  }
+}
+
+String _$connectivityServiceHash() =>
+    r'95e1b48f96e075c047a46e92aa33a19a18e68e05';
+
+@ProviderFor(syncOrchestrator)
+final syncOrchestratorProvider = SyncOrchestratorProvider._();
+
+final class SyncOrchestratorProvider
+    extends
+        $FunctionalProvider<
+          SyncOrchestrator,
+          SyncOrchestrator,
+          SyncOrchestrator
+        >
+    with $Provider<SyncOrchestrator> {
+  SyncOrchestratorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'syncOrchestratorProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$syncOrchestratorHash();
+
+  @$internal
+  @override
+  $ProviderElement<SyncOrchestrator> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  SyncOrchestrator create(Ref ref) {
+    return syncOrchestrator(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SyncOrchestrator value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SyncOrchestrator>(value),
+    );
+  }
+}
+
+String _$syncOrchestratorHash() => r'b117b843a651a9da4d650abdeebd2ef37cacba9e';
+
 @ProviderFor(posts)
 final postsProvider = PostsProvider._();
 
@@ -251,3 +345,77 @@ final class PostsProvider
 }
 
 String _$postsHash() => r'73d14a610f1d6c9144cf372ae733aeb42831906d';
+
+@ProviderFor(outboxMutations)
+final outboxMutationsProvider = OutboxMutationsProvider._();
+
+final class OutboxMutationsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<OutboxMutation>>,
+          List<OutboxMutation>,
+          Stream<List<OutboxMutation>>
+        >
+    with
+        $FutureModifier<List<OutboxMutation>>,
+        $StreamProvider<List<OutboxMutation>> {
+  OutboxMutationsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'outboxMutationsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$outboxMutationsHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<List<OutboxMutation>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<OutboxMutation>> create(Ref ref) {
+    return outboxMutations(ref);
+  }
+}
+
+String _$outboxMutationsHash() => r'6058a2768efb62151295d2ba9e0aaa2532f38ebb';
+
+@ProviderFor(isOnline)
+final isOnlineProvider = IsOnlineProvider._();
+
+final class IsOnlineProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, Stream<bool>>
+    with $FutureModifier<bool>, $StreamProvider<bool> {
+  IsOnlineProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isOnlineProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isOnlineHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<bool> create(Ref ref) {
+    return isOnline(ref);
+  }
+}
+
+String _$isOnlineHash() => r'b97bf97d1cda8b90f0930a54aa2225492a8f175e';

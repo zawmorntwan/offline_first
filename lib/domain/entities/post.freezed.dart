@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Post {
 
- int get id; int get userId; String get title; String get body;
+ String get id; int get userId; String get title; String get body; bool get isSyncPending; bool get hasSyncFailed;
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $PostCopyWith<Post> get copyWith => _$PostCopyWithImpl<Post>(this as Post, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Post&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Post&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.isSyncPending, isSyncPending) || other.isSyncPending == isSyncPending)&&(identical(other.hasSyncFailed, hasSyncFailed) || other.hasSyncFailed == hasSyncFailed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,title,body);
+int get hashCode => Object.hash(runtimeType,id,userId,title,body,isSyncPending,hasSyncFailed);
 
 @override
 String toString() {
-  return 'Post(id: $id, userId: $userId, title: $title, body: $body)';
+  return 'Post(id: $id, userId: $userId, title: $title, body: $body, isSyncPending: $isSyncPending, hasSyncFailed: $hasSyncFailed)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $PostCopyWith<$Res>  {
   factory $PostCopyWith(Post value, $Res Function(Post) _then) = _$PostCopyWithImpl;
 @useResult
 $Res call({
- int id, int userId, String title, String body
+ String id, int userId, String title, String body, bool isSyncPending, bool hasSyncFailed
 });
 
 
@@ -62,13 +62,15 @@ class _$PostCopyWithImpl<$Res>
 
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,Object? isSyncPending = null,Object? hasSyncFailed = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isSyncPending: null == isSyncPending ? _self.isSyncPending : isSyncPending // ignore: cast_nullable_to_non_nullable
+as bool,hasSyncFailed: null == hasSyncFailed ? _self.hasSyncFailed : hasSyncFailed // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -153,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int userId,  String title,  String body)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int userId,  String title,  String body,  bool isSyncPending,  bool hasSyncFailed)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Post() when $default != null:
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   return orElse();
 
 }
@@ -174,10 +176,10 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int userId,  String title,  String body)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int userId,  String title,  String body,  bool isSyncPending,  bool hasSyncFailed)  $default,) {final _that = this;
 switch (_that) {
 case _Post():
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +196,10 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int userId,  String title,  String body)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int userId,  String title,  String body,  bool isSyncPending,  bool hasSyncFailed)?  $default,) {final _that = this;
 switch (_that) {
 case _Post() when $default != null:
-return $default(_that.id,_that.userId,_that.title,_that.body);case _:
+return $default(_that.id,_that.userId,_that.title,_that.body,_that.isSyncPending,_that.hasSyncFailed);case _:
   return null;
 
 }
@@ -209,13 +211,15 @@ return $default(_that.id,_that.userId,_that.title,_that.body);case _:
 
 
 class _Post implements Post {
-  const _Post({required this.id, required this.userId, required this.title, required this.body});
+  const _Post({required this.id, required this.userId, required this.title, required this.body, this.isSyncPending = false, this.hasSyncFailed = false});
   
 
-@override final  int id;
+@override final  String id;
 @override final  int userId;
 @override final  String title;
 @override final  String body;
+@override@JsonKey() final  bool isSyncPending;
+@override@JsonKey() final  bool hasSyncFailed;
 
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +231,16 @@ _$PostCopyWith<_Post> get copyWith => __$PostCopyWithImpl<_Post>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Post&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Post&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.isSyncPending, isSyncPending) || other.isSyncPending == isSyncPending)&&(identical(other.hasSyncFailed, hasSyncFailed) || other.hasSyncFailed == hasSyncFailed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,userId,title,body);
+int get hashCode => Object.hash(runtimeType,id,userId,title,body,isSyncPending,hasSyncFailed);
 
 @override
 String toString() {
-  return 'Post(id: $id, userId: $userId, title: $title, body: $body)';
+  return 'Post(id: $id, userId: $userId, title: $title, body: $body, isSyncPending: $isSyncPending, hasSyncFailed: $hasSyncFailed)';
 }
 
 
@@ -247,7 +251,7 @@ abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   factory _$PostCopyWith(_Post value, $Res Function(_Post) _then) = __$PostCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int userId, String title, String body
+ String id, int userId, String title, String body, bool isSyncPending, bool hasSyncFailed
 });
 
 
@@ -264,13 +268,15 @@ class __$PostCopyWithImpl<$Res>
 
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? title = null,Object? body = null,Object? isSyncPending = null,Object? hasSyncFailed = null,}) {
   return _then(_Post(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isSyncPending: null == isSyncPending ? _self.isSyncPending : isSyncPending // ignore: cast_nullable_to_non_nullable
+as bool,hasSyncFailed: null == hasSyncFailed ? _self.hasSyncFailed : hasSyncFailed // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

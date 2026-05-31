@@ -5,9 +5,11 @@ part 'post.freezed.dart';
 @freezed
 abstract class Post with _$Post {
   const factory Post({
-    required int id,
+    required String id,
     required int userId,
     required String title,
     required String body,
+    @Default(false) bool isSyncPending,
+    @Default(false) bool hasSyncFailed,
   }) = _Post;
 }

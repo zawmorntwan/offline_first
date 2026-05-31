@@ -4,8 +4,11 @@ import '../../data/datasources/local/database_helper.dart';
 import '../../data/datasources/remote/post_api_service.dart';
 import '../../data/repositories/post_repository_impl.dart';
 import '../../domain/entities/post.dart';
+import '../../domain/entities/outbox_mutation.dart';
 import '../../domain/repositories/post_repository.dart';
 import '../../domain/usecases/get_posts_usecase.dart';
+import '../../utils/services/connectivity_service.dart';
+import '../../utils/services/sync_orchestrator.dart';
 
 part 'post_provider.g.dart';
 
@@ -37,7 +40,30 @@ GetPostsUseCase getPostsUseCase(Ref ref) {
   return GetPostsUseCase(ref.watch(postRepositoryProvider));
 }
 
+@Riverpod(keepAlive: true)
+ConnectivityService connectivityService(Ref ref) {
+  return ConnectivityService();
+}
+
+@Riverpod(keepAlive: true)
+SyncOrchestrator syncOrchestrator(Ref ref) {
+  return SyncOrchestrator(
+    ref.watch(connectivityServiceProvider),
+    ref.watch(postRepositoryProvider),
+  );
+}
+
 @riverpod
 Stream<List<Post>> posts(Ref ref) {
   return ref.watch(getPostsUseCaseProvider).call();
+}
+
+@riverpod
+Stream<List<OutboxMutation>> outboxMutations(Ref ref) {
+  return ref.watch(postRepositoryProvider).getOutbox();
+}
+
+@riverpod
+Stream<bool> isOnline(Ref ref) {
+  return ref.watch(connectivityServiceProvider).isOnlineStream;
 }
